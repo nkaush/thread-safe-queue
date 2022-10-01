@@ -1,4 +1,4 @@
-use thread_safe_queue::ThreadSafeQueue;
+use tsq::ThreadSafeQueue;
 use std::thread::JoinHandle;
 use std::sync::Arc;
 use std::thread;
