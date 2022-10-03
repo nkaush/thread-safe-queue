@@ -30,3 +30,27 @@ impl<T> ThreadSafeQueue<T> {
         self.cv.notify_one();
     }
 }
+
+impl<T> Default for ThreadSafeQueue<T> {
+    fn default() -> Self { 
+        Self::new()
+    }
+}
+
+impl<T> From<VecDeque<T>> for ThreadSafeQueue<T> {
+    fn from(vd: VecDeque<T>) -> Self { 
+        Self {
+            m: Mutex::new(vd),
+            cv: Condvar::new()
+        }
+    }
+}
+
+impl<T> From<Vec<T>> for ThreadSafeQueue<T> {
+    fn from(v: Vec<T>) -> Self { 
+        Self {
+            m: Mutex::new(v.into()),
+            cv: Condvar::new()
+        }
+    }
+}
